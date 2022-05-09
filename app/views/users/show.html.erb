@@ -1,19 +1,10 @@
-<nav class="header">
-  <div><%= link_to "Discover", root_path %></div>
-
-</nav>
-
 <h3>Welcome, <%= current_user.email %></h3>
 
 <h2>Events you have created: </h2>
 <ul>
   <% current_user.events.each do |event| %>
     <li>
-      <div>
-        Event: <%= event.title %> <br>
-        Date: <%= event.date %> <br>
-        Location: <%= event.location %> <br>
-      </div>
+      <%= link_to event.title, event_path(event.id) %>
     </li>
   <% end %>
 </ul>

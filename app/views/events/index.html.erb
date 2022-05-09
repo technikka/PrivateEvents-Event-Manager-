@@ -1,11 +1,14 @@
-<nav class="header">
-  <div><%= link_to "Discover", root_path %></div>
-  <% if user_signed_in? %>
-    <div><%= link_to current_user.email, user_path(current_user.id) %></div>
-  <% else %>
-    <div><%= link_to "Sign In", new_user_session_path %></div>
-    <div><%= link_to "Sign Up", new_user_registration_path %></div>
-  <% end %>
-</nav>
 <h3>All Events</h3>
+
+<% @events.each do |event| %>
+  <div>
+    <p>
+      <%= event.date %>
+      <%= link_to event.title, event_path(event.id) %> 
+      @
+      <%= event.location %>
+    </p>
+  </div>
+  <br>
+<% end %>
 
