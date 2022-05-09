@@ -17,3 +17,16 @@
  html {
    font-family: 'Ubuntu';
  }
+
+ .notice {
+   color: green;
+ }
+
+ .alert {
+  color: red;
+ }
+
+ .header {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+ }
