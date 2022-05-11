@@ -1,9 +1,33 @@
-<h3>All Events</h3>
-
-<% @events.each do |event| %>
+<h3>What's happening today:</h3>
+<% Event.today.each do |event| %>
   <div>
     <p>
-      <%= event.date %>
+      <%= event.date.strftime('%b %e') %>
+      <%= link_to event.title, event_path(event.id) %> 
+      @
+      <%= event.location %>
+    </p>
+  </div>
+<% end %>
+<br>
+<h3>Upcoming Events</h3>
+<% Event.upcoming.each do |event| %>
+  <div>
+    <p>
+      <%= event.date.strftime('%b %e') %>
+      <%= link_to event.title, event_path(event.id) %> 
+      @
+      <%= event.location %>
+    </p>
+  </div>
+  <br>
+<% end %>
+<br>
+<h3>Past Events</h3>
+<% Event.past.each do |event| %>
+  <div>
+    <p>
+      <%= event.date.strftime('%b %e') %>
       <%= link_to event.title, event_path(event.id) %> 
       @
       <%= event.location %>
