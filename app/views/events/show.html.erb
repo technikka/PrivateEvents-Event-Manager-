@@ -2,5 +2,23 @@
   <h3><%= @event.title %></h3>
   <p><strong>Date: </strong> <%= @event.date %></p>
   <p><strong>Location: </strong> <%= @event.location %></p>
+  <p>Event created by: <%= @event.creator.email %></p> <br>
 </div>
+
+<%= form_with model: @attendable_events do |form| %>
+  <%= form.check_box :attend %>
+  <%= form.label :attend, "I'd like to attend" %> <br>
+  <%= form.submit "Count me in!" %>
+<% end %>
+
+<h4><%= @event.attendees.count %> people are going</h4>
+
+<% @event.attendees.each do |attendee| %>
+  <ul>
+    <li>
+      <%= attendee.email %>
+    </li>
+  </ul>
+<% end %>
+
 
