@@ -5,11 +5,16 @@
   <p>Event created by: <%= @event.creator.email %></p> <br>
 </div>
 
-<%= form_with model: @attendable_events do |form| %>
-  <%= form.check_box :attend %>
-  <%= form.label :attend, "I'd like to attend" %> <br>
-  <%= form.submit "Count me in!" %>
+<% if user_signed_in? %>
+  <%= form_with model: @attendable_events do |form| %>
+    <%= form.check_box :attend %>
+    <%= form.label :attend, "I'd like to attend" %> <br>
+    <%= form.submit "Count me in!" %>
+  <% end %>
+<% else %>
+  <em>Log in or sign up to register for this event.</em>
 <% end %>
+
 
 <h4><%= @event.attendees.count %> people are going</h4>
 

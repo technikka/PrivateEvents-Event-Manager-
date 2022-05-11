@@ -1,10 +1,6 @@
 class AttendableEventsController < ApplicationController
   before_action :authenticate_user!
 
-  def new
-    @attendable_event = AttendableEvent.new
-  end
-
   def create
     if attendable_event_params[:attend] == '1'
       @ae = AttendableEvent.new

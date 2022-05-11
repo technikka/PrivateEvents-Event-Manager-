@@ -1,6 +1,9 @@
-<h3>Welcome, <%= current_user.email %></h3>
+<h2><%= current_user.email %>'s Events</h2>
 
-<h2>Events you have created: </h2>
+<h3>Created: </h3>
+<% if current_user.events.length.zero? %>
+  <p><em>Nothing to show here right now.</em></p>
+<% end %>
 <ul>
   <% current_user.events.each do |event| %>
     <li>
@@ -9,9 +12,21 @@
   <% end %>
 </ul>
 
-<h2>Events you are registered to attend:</h2>
+<h3>Coming up:</h3>
+<% if current_user.attended_events.length.zero? %>
+  <p><em>Nothing to show here right now.</em></p>
+<% end %>
 <ul>
-  <% current_user.attended_events.each do |event| %>
+  <% current_user.attended_events.where("date >= ?", Time.current).each do |event| %>
+    <li>
+      <%= link_to event.title, event_path(event.id) %>
+    </li>
+  <% end %>
+</ul>
+
+<h3>Past:</h3>
+<ul>
+  <% current_user.attended_events.where("date < ?", Time.current).each do |event| %>
     <li>
       <%= link_to event.title, event_path(event.id) %>
     </li>
