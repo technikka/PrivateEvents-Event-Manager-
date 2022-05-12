@@ -5,12 +5,27 @@
   <p><em>Nothing to show here right now.</em></p>
 <% end %>
 <ul>
-  <% current_user.events.each do |event| %>
+  <% current_user.events.where("date >= ?", Date.current).each do |event| %>
     <li>
-      <%= link_to event.title, event_path(event.id) %>
+      <p>
+        <%= link_to event.title, event_path(event.id) %>
+        <%= link_to "[edit]", edit_event_path(event.id)  %>
+      </p>
+      <br>
+      <p>
+        <em>Past:</em> <br>
+        <% current_user.events.where("date < ?", Date.current).each do |event| %>
+        <li>
+          <p>
+            <%= link_to event.title, event_path(event.id) %>
+          </p>
+        </li>
+        <% end %>
+      </p>
     </li>
   <% end %>
 </ul>
+<br>
 
 <h3>Coming up:</h3>
 <% if current_user.attended_events.length.zero? %>
@@ -23,6 +38,7 @@
     </li>
   <% end %>
 </ul>
+<br>
 
 <h3>Past:</h3>
 <ul>
