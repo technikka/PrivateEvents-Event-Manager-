@@ -4,27 +4,26 @@
 <% if current_user.events.length.zero? %>
   <p><em>Nothing to show here right now.</em></p>
 <% end %>
-<ul>
-  <% current_user.events.where("date >= ?", Date.current).each do |event| %>
-    <li>
-      <p>
-        <%= link_to event.title, event_path(event.id) %>
-        <%= link_to "[edit]", edit_event_path(event.id)  %>
-      </p>
-      <br>
-      <p>
-        <em>Past:</em> <br>
-        <% current_user.events.where("date < ?", Date.current).each do |event| %>
-        <li>
-          <p>
-            <%= link_to event.title, event_path(event.id) %>
-          </p>
-        </li>
-        <% end %>
-      </p>
-    </li>
-  <% end %>
-</ul>
+
+<% current_user.events.where("date >= ?", Date.current).each do |event| %>
+  <li>
+    <p>
+      <%= link_to event.title, event_path(event.id) %>
+      <%= link_to "[edit]", edit_event_path(event.id)  %>
+    </p>
+    <br>
+  </li>
+<% end %>
+
+<br>
+<em>Past:</em> <br>
+<% current_user.events.where("date < ?", Date.current).each do |event| %>
+  <li>
+    <p>
+      <%= link_to event.title, event_path(event.id) %>
+    </p>
+  </li>
+<% end %>
 <br>
 
 <h3>Coming up:</h3>
